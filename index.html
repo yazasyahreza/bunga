@@ -28,7 +28,7 @@
         align-items: center;
         color: white;
         text-align: center;
-        overflow: hidden;
+        overflow-y: auto;
       }
 
       /* Floating hearts */
@@ -151,6 +151,8 @@
         opacity: 0;
         animation: fadeCard 0.45s ease forwards;
         font-family: "Poppins", sans-serif;
+        max-height: 80vh;
+        overflow-y: auto;
       }
 
       @keyframes fadeCard {
