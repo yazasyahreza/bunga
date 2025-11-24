@@ -20,18 +20,30 @@
     <style>
       body {
         font-family: "Poppins", sans-serif;
-        height: 100vh;
         margin: 0;
         background: radial-gradient(circle at top, #2b0a14, #000 70%);
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        min-height: 100vh; /* lebih stabil daripada 100vh */
+        overflow-x: hidden;
         color: white;
         text-align: center;
-        overflow-y: auto;
       }
 
-      /* Floating hearts */
+      /* Container floating hearts */
+      #heartsContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+      }
+
       .heart {
         position: absolute;
         color: rgba(255, 140, 160, 0.4);
@@ -54,7 +66,6 @@
         }
       }
 
-      /* Fade-in content */
       .fade-in {
         opacity: 0;
         transform: translateY(10px);
@@ -68,7 +79,6 @@
         }
       }
 
-      /* Romantic title */
       .title-romantic {
         font-size: 2.4rem;
         font-weight: 700;
@@ -83,7 +93,6 @@
         margin-bottom: 25px;
       }
 
-      /* Romantic pink button */
       .btn-romantic {
         background: #ffffff;
         color: #e6006f;
@@ -92,20 +101,16 @@
         border-radius: 40px;
         border: none;
         font-size: 1rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        box-shadow: 0 4px 20px rgba(255, 100, 150, 0.35);
         transition: 0.25s ease;
         margin-bottom: 15px;
+        box-shadow: 0 4px 20px rgba(255, 100, 150, 0.35);
       }
 
       .btn-romantic:hover {
-        transform: scale(1.08);
+        transform: scale(1.07);
         box-shadow: 0 6px 30px rgba(255, 80, 140, 0.55);
       }
 
-      /* White “Buat Kamu” button */
       .love-btn {
         padding: 10px 28px;
         border-radius: 40px;
@@ -118,8 +123,7 @@
       }
 
       .love-btn:hover {
-        transform: scale(1.08);
-        box-shadow: 0 0 16px rgba(255, 200, 220, 0.8);
+        transform: scale(1.07);
       }
 
       #overlay {
@@ -128,66 +132,62 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.55);
         display: none;
         z-index: 9;
       }
 
-      /* Card putih profesional */
       #letterCard {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        inset: 0;
+        margin: auto;
         width: 90%;
         max-width: 450px;
+        max-height: 80vh; /* supaya tidak penuh di Android */
+        overflow-y: auto;
         background: #ffffff;
         border-radius: 18px;
-        padding: 30px 28px;
+        padding: 26px 24px;
         color: #333;
         box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
         display: none;
         z-index: 10;
         opacity: 0;
         animation: fadeCard 0.45s ease forwards;
-        font-family: "Poppins", sans-serif;
-        max-height: 80vh;
-        overflow-y: auto;
       }
 
       @keyframes fadeCard {
         from {
           opacity: 0;
-          transform: translate(-50%, -46%);
+          transform: scale(0.95);
         }
         to {
           opacity: 1;
-          transform: translate(-50%, -50%);
+          transform: scale(1);
         }
       }
 
-      /* Tombol Tutup */
       .close-btn {
-        margin-top: 18px;
         background: #ff477e;
         border: none;
         padding: 10px 25px;
         border-radius: 30px;
         font-weight: 600;
         color: white;
-        box-shadow: 0 4px 12px rgba(255, 90, 140, 0.4);
-        transition: 0.25s;
+        margin-top: 15px;
+        transition: 0.2s;
       }
 
       .close-btn:hover {
         transform: scale(1.07);
-        background: #ff2e6e;
       }
     </style>
   </head>
 
   <body>
-    <!-- Floating hearts generator -->
+    <!-- Floating Hearts -->
+    <div id="heartsContainer"></div>
+
     <script>
       function createHeart() {
         const heart = document.createElement("div");
@@ -198,7 +198,7 @@
         heart.style.fontSize = Math.random() * 20 + 12 + "px";
         heart.style.animationDuration = Math.random() * 3 + 4 + "s";
 
-        document.body.appendChild(heart);
+        document.getElementById("heartsContainer").appendChild(heart);
 
         setTimeout(() => heart.remove(), 6000);
       }
@@ -216,10 +216,10 @@
       }
     </script>
 
-    <div class="container fade-in">
+    <div class="container fade-in" style="z-index: 5">
       <h1 class="title-romantic">HAI SAYANG ❤️</h1>
       <p class="sub-romantic">
-        Aku mau kasih kamu sesuatu, tapi kamu baca dulu ya suratnya
+        Aku mau kasih kamu sesuatu, tapi baca dulu ya suratnya
       </p>
 
       <div class="d-flex justify-content-center gap-3 mt-3 flex-wrap">
@@ -236,11 +236,11 @@
     <!-- Overlay -->
     <div id="overlay" onclick="closeLetter()"></div>
 
-    <!-- Card Surat -->
+    <!-- Letter Card -->
     <div id="letterCard">
-      <h3 style="text-align: center; margin-bottom: 10px">My Sweetipie ❤️</h3>
+      <h3 style="text-align: center; margin-bottom: 12px">My Sweetipie ❤️</h3>
 
-      <p style="text-align: justify; line-height: 1.6">
+      <p style="text-align: justify; line-height: 1.55">
         Sayaaang... aku cuman mau bilang kalau kamu itu berharga banget buat
         aku. Aku selalu bersyukur bisa kenal kamu, bisa denger suara kamu, bisa
         baca pesan kamu, bisa lihat senyum manis kamu, bisa lihat teduh mata
@@ -251,8 +251,8 @@
         disayang, dicintai, dan dihargai. Karna itu yang aku rasakan saat sama
         kamu.
         <br /><br />
-        Happy Anniversary yang ke 11 sayaaang... I LOVE YOU SO MUCH THEN YOU
-        KNOW, Salsabila Salwa Fauzi ❤️
+        Happy Anniversary yang ke 11 sayaaang...
+        <b>I LOVE YOU SO MUCH THEN YOU KNOW, Salsabila Salwa Fauzi ❤️</b>
       </p>
 
       <div class="text-center">
