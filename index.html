@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hai Sayang ❤️</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        height: 100vh;
+        margin: 0;
+        background: radial-gradient(circle at top, #2b0a14, #000 70%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      /* Floating hearts */
+      .heart {
+        position: absolute;
+        color: rgba(255, 140, 160, 0.4);
+        animation: floatUp 6s linear infinite;
+        font-size: 18px;
+        user-select: none;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0;
+        }
+        20% {
+          opacity: 0.9;
+        }
+        100% {
+          transform: translateY(-200px) scale(1.6);
+          opacity: 0;
+        }
+      }
+
+      /* Fade-in content */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeIn 1.4s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Romantic title */
+      .title-romantic {
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-shadow: 0 0 12px rgba(255, 120, 150, 0.45);
+      }
+
+      .sub-romantic {
+        font-size: 1.1rem;
+        opacity: 0.8;
+        margin-top: 5px;
+        margin-bottom: 25px;
+      }
+
+      /* Romantic pink button */
+      .btn-romantic {
+        background: #ffffff;
+        color: #e6006f;
+        font-weight: 600;
+        padding: 12px 28px;
+        border-radius: 40px;
+        border: none;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 20px rgba(255, 100, 150, 0.35);
+        transition: 0.25s ease;
+        margin-bottom: 15px;
+      }
+
+      .btn-romantic:hover {
+        transform: scale(1.08);
+        box-shadow: 0 6px 30px rgba(255, 80, 140, 0.55);
+      }
+
+      /* White “Buat Kamu” button */
+      .love-btn {
+        padding: 10px 28px;
+        border-radius: 40px;
+        font-weight: 600;
+        background: white;
+        border: none;
+        font-size: 1rem;
+        transition: 0.3s;
+        box-shadow: 0 0 10px rgba(255, 200, 220, 0.4);
+      }
+
+      .love-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 16px rgba(255, 200, 220, 0.8);
+      }
+
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        z-index: 9;
+      }
+
+      /* Card putih profesional */
+      #letterCard {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 450px;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 30px 28px;
+        color: #333;
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 10;
+        opacity: 0;
+        animation: fadeCard 0.45s ease forwards;
+        font-family: "Poppins", sans-serif;
+      }
+
+      @keyframes fadeCard {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -46%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      /* Tombol Tutup */
+      .close-btn {
+        margin-top: 18px;
+        background: #ff477e;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 30px;
+        font-weight: 600;
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 90, 140, 0.4);
+        transition: 0.25s;
+      }
+
+      .close-btn:hover {
+        transform: scale(1.07);
+        background: #ff2e6e;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Floating hearts generator -->
+    <script>
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "-20px";
+        heart.style.fontSize = Math.random() * 20 + 12 + "px";
+        heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+      }
+
+      setInterval(createHeart, 600);
+
+      function showLetter() {
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("letterCard").style.display = "block";
+      }
+
+      function closeLetter() {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("letterCard").style.display = "none";
+      }
+    </script>
+
+    <div class="container fade-in">
+      <h1 class="title-romantic">HAI SAYANG ❤️</h1>
+      <p class="sub-romantic">
+        Aku mau kasih kamu sesuatu, tapi kamu baca dulu ya suratnya
+      </p>
+
+      <div class="d-flex justify-content-center gap-3 mt-3 flex-wrap">
+        <button class="btn-romantic" onclick="showLetter()">
+          💌 Lihat Surat
+        </button>
+
+        <a href="flower.html">
+          <button class="love-btn">Buat Kamu</button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" onclick="closeLetter()"></div>
+
+    <!-- Card Surat -->
+    <div id="letterCard">
+      <h3 style="text-align: center; margin-bottom: 10px">My Sweetipie ❤️</h3>
+
+      <p style="text-align: justify; line-height: 1.6">
+        Sayaaang... aku cuman mau bilang kalau kamu itu berharga banget buat
+        aku. Aku selalu bersyukur bisa kenal kamu, bisa denger suara kamu, bisa
+        baca pesan kamu, bisa lihat senyum manis kamu, bisa lihat teduh mata
+        kamu, dan semua itu bikin hari-hariku jadi lebih berwarna. Ada sesuatu
+        dari diri kamu yang gabisa aku jelasin sayang... tapi hebatnya, kamu
+        selalu berhasil buat aku jatuh cinta lagi dan lagi. Kamu satu-satunya
+        perempuan yang ada dihati aku. Aku selalu ingin membuatmu merasa
+        disayang, dicintai, dan dihargai. Karna itu yang aku rasakan saat sama
+        kamu.
+        <br /><br />
+        Happy Anniversary yang ke 11 sayaaang... I LOVE YOU SO MUCH THEN YOU
+        KNOW, Salsabila Salwa Fauzi ❤️
+      </p>
+
+      <div class="text-center">
+        <button class="close-btn" onclick="closeLetter()">Tutup</button>
+      </div>
+    </div>
+  </body>
+</html>
