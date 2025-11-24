@@ -9,7 +9,7 @@ function createLove() {
   love.classList.add("love");
 
   // Emoji hati
-  const hearts = ["❤️", "❤️", "❤️", "❤️", "❤️"];
+  const hearts = ["❤️"];
   love.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
 
   // Posisi acak
